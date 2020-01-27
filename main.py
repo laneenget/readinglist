@@ -67,7 +67,7 @@ def change_read():
     book.save()
 
 def delete_book():
-    book_id = ui.ask_question("What is the ID of the book you would like to delete?")
+    book_id = ui.get_book_id()
     try:
         book = store.get_book_by_id(book_id)
         book.delete()
