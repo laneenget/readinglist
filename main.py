@@ -66,13 +66,6 @@ def change_read():
     book.read = new_read 
     book.save()
 
-"""Add a new function in main.py called delete_book
-delete_book should ask for the book's ID and call the Bookstore delete_book function. Use try-except to display an error message saying "Error: Book Not Found" if the user tries to delete a book that doesn't exist.
-
-Add a new menu option with the action delete_book. This should be option 7.
-
-Don't ask the user for any confirmation - just delete the book."""
-
 def delete_book():
     book_id = ui.ask_question("What is the ID of the book you would like to delete?")
     try:
