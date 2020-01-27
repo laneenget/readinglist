@@ -58,16 +58,14 @@ def search_book():
 
 
 def change_read():
-    try:
-        book_id = ui.get_book_id()
-        book = store.get_book_by_id(book_id)  
+    book_id = ui.get_book_id()
+    book = store.get_book_by_id(book_id) 
+    if(book != "None"):
         new_read = ui.get_read_value()     
         book.read = new_read 
         book.save()
-    except UnboundLocalError as e:
-        ui.message("Error: Book Not Found")
-
-    
+    else:
+        ui.message("Book not found.")
     
 
 def quit_program():
