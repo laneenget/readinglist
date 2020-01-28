@@ -60,9 +60,15 @@ def search_book():
 def change_read():
 
     book_id = ui.get_book_id()
-    book = store.get_book_by_id(book_id)  
+    book = store.get_book_by_id(book_id)
     new_read = ui.get_read_value()     
     book.read = new_read 
+
+    if book.read == 'read':
+        print(f'You have read {book.title} by {book.author}.')
+    else:
+        print(f'You have not read {book.title} by {book.author}.')
+
     book.save()
     
 
