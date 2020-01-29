@@ -65,9 +65,9 @@ def change_read():
     book.read = new_read 
 
     if book.read == 'read':
-        print(f'You have read {book.title} by {book.author}.')
+        ui.message(f'You have read {book.title} by {book.author}.')
     else:
-        print(f'You have not read {book.title} by {book.author}.')
+        ui.message(f'You have not read {book.title} by {book.author}.')
 
     book.save()
     
