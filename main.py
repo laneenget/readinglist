@@ -64,7 +64,7 @@ def change_read():
     new_read = ui.get_read_value()     
     book.read = new_read 
 
-    if book.read == 'read':
+    if book.read == True:
         ui.message(f'You have read {book.title} by {book.author}.')
     else:
         ui.message(f'You have not read {book.title} by {book.author}.')
