@@ -1,6 +1,6 @@
 """ Program to create and manage a list of books that the user wishes to read, and books that the user has read. """
 
-from bookstore import Book, BookStore
+from bookstore import Book, BookStore, BookError
 from menu import Menu
 import ui
 
@@ -26,14 +26,19 @@ def create_menu():
     menu.add_option('4', 'Show Read Books', show_read_books)
     menu.add_option('5', 'Show All Books', show_all_books)
     menu.add_option('6', 'Change Book Read Status', change_read)
+    menu.add_option('7', 'Delete Book', delete_book)
     menu.add_option('Q', 'Quit', quit_program)
 
     return menu
 
 
 def add_book():
-    new_book = ui.get_book_info()
-    new_book.save()
+    try:
+        new_book = ui.get_book_info()
+        new_book.save()
+    except:
+        print('Sorry, you cannot add the same book twice.')
+
     
 
 def show_read_books():
@@ -58,19 +63,27 @@ def search_book():
 
 
 def change_read():
-
     book_id = ui.get_book_id()
     book = store.get_book_by_id(book_id)
-    new_read = ui.get_read_value()     
-    book.read = new_read 
+    if(book != "None"):
+        new_read = ui.get_read_value()     
+        book.read = new_read
+        if book.read == True:
+            ui.message(f'You have read {book.title} by {book.author}.')
+        else:
+            ui.message(f'You have not read {book.title} by {book.author}.')
 
-    if book.read == True:
-        ui.message(f'You have read {book.title} by {book.author}.')
+        book.save()
     else:
-        ui.message(f'You have not read {book.title} by {book.author}.')
+        ui.message("Book not found.")
 
-    book.save()
-    
+def delete_book():
+    book_id = ui.get_book_id()
+    try:
+        book = store.get_book_by_id(book_id)
+        book.delete()
+    except UnboundLocalError as e:
+        ui.message("Error: Book Not Found")
 
 def quit_program():
     ui.message('Thanks and bye!')

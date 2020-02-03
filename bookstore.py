@@ -17,6 +17,8 @@ class Book:
 
         self.bookstore = BookStore()
 
+    """ Saves a book in the database.
+    If the book already exists, update the existing information. If not, add new book to the database."""
 
     def save(self):
         if self.id:
@@ -192,7 +194,8 @@ class BookStore:
             
             if book_data:
                 book = Book(book_data['title'], book_data['author'], book_data['read'], book_data['rowid'])
-                    
+            else:
+                book = "None"
             con.close()            
             
             return book 
